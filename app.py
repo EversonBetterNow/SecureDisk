@@ -1,0 +1,17 @@
+from flask import Flask
+
+
+config={
+		'DEBUG':'True',
+		'CACHE_TYPE': 'simple',
+		'CACHE_REDIS_HOST': '192.168.15.5',
+		'CACHE_REDIS_PORT': '8080',
+		'CACHE_REDIS_URL': 'simple://192.168.15.15:8080'
+		}
+
+def createApp():
+	app = Flask(__name__, template_folder='html/')
+	app.config.from_mapping(config)
+	app.config.from_object(config)
+	return app
+	
