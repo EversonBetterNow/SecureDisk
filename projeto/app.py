@@ -1,5 +1,5 @@
 from flask import Flask
-
+import server as server
 
 config={
 		'DEBUG':'True',
@@ -14,4 +14,6 @@ def createApp():
 	app.config.from_mapping(config)
 	app.config.from_object(config)
 	return app
-	
+
+if __name__ == "__main__":
+	server.iniciar()

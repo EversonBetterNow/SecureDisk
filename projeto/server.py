@@ -162,7 +162,10 @@ class servidor:
 		pprint(response.json()['data'])
 		print('\n SUCESSO!!!')
 
+def iniciar():
+	app.url_map.strict_slashes = False
+	criar.tabela()
+	app.run(debug=True, host='127.0.0.1', port = 8080)
+
 if __name__ == "__main__":
-   app.url_map.strict_slashes = False
-   criar.tabela()
-   app.run(debug=True, host='127.0.0.1', port = 8080)
+	iniciar()
