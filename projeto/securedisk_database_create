@@ -1,0 +1,54 @@
+
+create TABLE segurado(
+  proposta integer not null CONSTRAINT proposta_segurado PRIMARY key, 
+  nome varchar(100)not null, 
+  email varchar(100) not null, 
+  senha varchar(20) not null);
+
+create TABLE colaborador(
+  id integer CONSTRAINT id_colaborador PRIMARY key AUTOINCREMENT not null, 
+  nome varchar(100) not null, 
+  email varchar(100) not null, 
+  senha varchar(20) not null);
+  
+create table petCalendar(
+id integer CONSTRAINT id_pet PRIMARY key AUTOINCREMENT not NULL,
+proposta integer NOT NULL,
+nome varchar(200) NOT NULL,
+email varchar(300) NOT NULL,
+data date NOT NULL,
+hora time not NULL,
+CONSTRAINT pega_proposta FOREIGN key(proposta) REFERENCES segurado(proposta));
+
+create table veterinario(
+  id integer CONSTRAINT id_veterinario PRIMARY key AUTOINCREMENT not NULL,
+  nome varchar(200) not NULL,
+  email varchar(300) not NULL,
+  senha varchar(20) not NULL,
+  cnpj varchar(18) not NULL,
+  fantasia varchar(200) NOT NULL
+  );
+
+
+
+CREATE table emergencia(
+	id integer CONSTRAINT id_areas primary key not NULL,
+  	tipo varchar(100) not NULL,
+  	chamado integer NOT NULL,
+  	label varchar(999) not NULL,
+  	latitude varchar(999) not NULL,
+  	longitude varchar(999) not NULL
+)
+
+insert into PetCalendar values(0,
+  	26310107827670, 
+  	'Fulano de Tal', 
+  	'fulanodetal01072020@gmail.com',
+	'01-07-2020',
+	'00:00')
+	
+	70012150077700, 
+  	'fulaninho', 
+  	'fulanodetal2140@gmail.com',
+	'01-07-2020',
+	'00:00')
