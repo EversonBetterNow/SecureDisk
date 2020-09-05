@@ -1,8 +1,10 @@
-import database.consulta 	as databaseQuery
-import database.criar 		as criar
-import database.control		as c
-import app					as a
-import os					as os
+import database.colaborador.consulta 	as colaboradorQuery
+import database.segurado.consulta 		as seguradoQuery
+import database.segurado.criar			as seguradoCreate
+import database.criar 					as criar
+import database.control					as c
+import app								as a
+import os								as os
 import requests
 from pprint import pprint as pprint
 from flask 	import render_template
@@ -12,24 +14,24 @@ from flask 	import request
 from flask 	import Flask
 from flask 	import url_for
 
-app 			= a.createApp()
 control 		= c.Control()
-consulta 		= databaseQuery.ConsultaBanco(control)
+principal 		= a.Principal(control)
+app 			= principal.createApp()
 app.secret_key 	= os.urandom(16)
+consultaSegurado 		= seguradoQuery.ConsultaBanco(control)
+consultaColaborador		= colaboradorQuery.ConsultaBanco(control)
+criarSegurado			= seguradoCreate
 
 class servidor:
 	
+
 	@app.route("/", methods=['GET'])
 	def index():
-		if (('email' in session)and
-			('senha' in session)):
-			control.setEmail(session['email'])
-			control.setSenha(session['senha'])
-
-			if (consulta.segurado()):
+		if (verificacaoDeSessao()):
+			if (consultaSegurado.seguradoExiste()):
 				return redirect('/logando')
 
-			if (consulta.colaborador()):
+			if (consultaColaborador.colaboradorExiste()):
 				return redirect('/logando')
 		else:
 			return render_template('index.html')
@@ -41,27 +43,26 @@ class servidor:
 			control.setEmail(form.get('email'))
 			control.setSenha(form.get('senha'))
 
-			if(consulta.colaborador()):
+			if(consultaColaborador.colaboradorExiste()):
 				session['email'] = control.getEmail()
 				session['senha'] = control.getSenha()
 				return redirect('/caixa_de_entrada')
 
-			elif(consulta.segurado()):
+			elif(consultaSegurado.seguradoExiste()):
 				session['email'] = control.getEmail()
 				session['senha'] = control.getSenha()
 				return redirect('/home')
 			else:
 				return render_template('index.html', msg='Erro: Email ou Senha inválida')
 
-		if (('email' in session)and
-			('senha' in session)):
+		if (verificacaoDeSessao()):
 			control.setEmail(session['email'])
 			control.setSenha(session['senha'])
 
-			if (consulta.segurado()):
+			if (consultaSegurado.seguradoExiste()):
 				return redirect('/home')
 
-			if (consulta.colaborador()):
+			if (consultaColaborador.colaboradorExiste()):
 				return redirect('/caixa_de_entrada')
 
 		else:
@@ -69,9 +70,8 @@ class servidor:
 
 	@app.route('/caixa_de_entrada', methods=['GET'])
 	def caixa_de_entrada():
-		if (	('email' in session)and
-				('senha' in session)and
-				consulta.colaborador()):
+		if (	verificacaoDeSessao() and
+				consultaColaborador.colaboradorExiste()):
 			control.setEmail(session['email'])
 			control.setSenha(session['senha'])
 			return render_template('caixa_de_entrada.html')
@@ -79,9 +79,8 @@ class servidor:
 
 	@app.route("/home",methods=['GET'])
 	def home():
-		if (	('email' in session)and
-				('senha' in session)and
-				consulta.segurado()):
+		if (	verificacaoDeSessao() and
+				consultaSegurado.seguradoExiste()):
 			control.setEmail(session['email'])
 			control.setSenha(session['senha'])
 			return render_template('home.html')
@@ -89,7 +88,7 @@ class servidor:
 
 	@app.route("/logout", methods=['POST','GET'])
 	def logout():
-		if 'email' in session and 'senha' in session:
+		if verificacaoDeSessao:
 			session.pop('email', None)
 			session.pop('senha', None)
 		return redirect('/')
@@ -161,6 +160,15 @@ class servidor:
 		print('\n')
 		pprint(response.json()['data'])
 		print('\n SUCESSO!!!')
+
+# ESQUECE QUE ISSO AQUI EXISTE!!! NÃO MEXA!!!
+def verificacaoDeSessao():
+	if (('email' in session)and
+		('senha' in session)):
+		control.setEmail(session['email'])
+		control.setSenha(session['senha'])
+		return True
+	return False
 
 def iniciar():
 	app.url_map.strict_slashes = False
