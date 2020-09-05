@@ -7,7 +7,7 @@ def tabela():
 
 	# Create table
 	c.execute('''
-		CREATE TABLE 		IF NOT EXISTS segurado(
+		CREATE TABLE IF NOT EXISTS segurado(
 		proposta integer		not null CONSTRAINT proposta_segurado PRIMARY key, 
 		nome 	varchar(100)	not null, 
 		email 	varchar(100) 	not null, 
