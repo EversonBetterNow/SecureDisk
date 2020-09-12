@@ -9,7 +9,7 @@ config={
 		}
 
 def createApp():
-	app = Flask(__name__, template_folder='html/')
+	app = Flask(__name__, template_folder='views/')
 	app.config.from_mapping(config)
 	app.config.from_object(config)
 	return app

@@ -1,10 +1,6 @@
-import database.colaborador.consulta 	as colaboradorQuery
-import database.segurado.consulta 		as seguradoQuery
-import database.segurado.criar			as seguradoCreate
-import database.criar 					as criar
-import database.control					as c
-import configApp						as a
-import os								as os
+import chaos.control					as c
+import configApp					as a
+import os
 import requests
 from pprint import pprint as pprint
 from flask 	import render_template
@@ -20,9 +16,6 @@ control 		= c.Control()
 app 			= a.createApp()
 app.secret_key 	= os.urandom(16)
 
-consultaSegurado 		= seguradoQuery.ConsultaBanco(control)
-consultaColaborador		= colaboradorQuery.ConsultaBanco(control)
-criarSegurado			= seguradoCreate
 
 class servidor:
 	
@@ -34,8 +27,8 @@ class servidor:
 			if (consultaSegurado.seguradoExiste()):
 				return redirect('/logando')
 
-			if (consultaColaborador.colaboradorExiste()):
-				return redirect('/logando')
+			# if (consultaColaborador.colaboradorExiste()):
+			# 	return redirect('/logando')
 		else:
 			return render_template('index.html')
 
@@ -44,44 +37,35 @@ class servidor:
 	def logando():
 		if(request.method == 'POST'):
 			form 	= request.form
-			control.setEmail(form.get('email'))
-			control.setSenha(form.get('senha'))
 
-			if(consultaColaborador.colaboradorExiste()):
-				session['email'] = control.getEmail()
-				session['senha'] = control.getSenha()
-				return redirect('/caixa_de_entrada')
+			# if(consultaColaborador.colaboradorExiste()):
+			# 	return redirect('/caixa_de_entrada')
 
-			elif(verificaLogin(control.getEmail(), control.getSenha())):
-				session['email'] = control.getEmail()
-				session['senha'] = control.getSenha()
+			if(verificaLogin(form.get('mail'), form.get('password'))):
 				return redirect('/home')
 			else:
-				return render_template('index.html', msg='Erro: Email ou Senha inválida')
+				return render_template('index.html', msg='Erro: Email ou password inválida')
 
-		if (verificacaoDeSessao()):
+		elif (verificacaoDeSessao()):
 			if (consultaSegurado.seguradoExiste()):
 				return redirect('/home')
-
-			if (consultaColaborador.colaboradorExiste()):
-				return redirect('/caixa_de_entrada')
-
+			# if (consultaColaborador.colaboradorExiste()):
+			# 	return redirect('/caixa_de_entrada')
 		else:
 			return redirect('/')
 
 
 	@app.route('/caixa_de_entrada', methods=['GET'])
 	def caixa_de_entrada():
-		if (	verificacaoDeSessao() and
-				consultaColaborador.colaboradorExiste()):
-			return render_template('caixa_de_entrada.html')
+		# if (	verificacaoDeSessao() and
+		# 		consultaColaborador.colaboradorExiste()):
+		# 	return render_template('caixa_de_entrada.html')
 		return redirect('/')
 
 
 	@app.route("/home",methods=['GET'])
 	def home():
-		if (	verificacaoDeSessao() and
-				consultaSegurado.seguradoExiste()):
+		if (verificacaoDeSessao()):
 			return render_template('home.html')
 		return redirect('/')
 
@@ -91,7 +75,7 @@ class servidor:
 	def logout():
 		if verificacaoDeSessao:
 			session.pop('email', None)
-			session.pop('senha', None)
+			session.pop('password', None)
 		return redirect('/')
 
 
@@ -155,43 +139,45 @@ class servidor:
 	def teste(latitude, longitude):
 		control.setLatitude(latitude)
 		control.setLongitude(longitude)
-		servidor.pegar_endereco()
-		return '<b align="center">SUCESSO!!!</b>'
-
-
-	def pegar_endereco():
 		response = requests.get(control.getLocalizacao())
 		print('\n')
 		pprint(response.json()['data'])
 		print('\n SUCESSO!!!')
+		return '<b align="center">SUCESSO!!!</b>'
 
 
 # ESQUECE QUE ISSO AQUI EXISTE!!! NÃO MEXA!!!
+# Verifica se existe alguma variável de sessão
 def verificacaoDeSessao():
 	if (('email' in session)and
-		('senha' in session)):
-		control.setEmail(session['email'])
-		control.setSenha(session['senha'])
+		('password' in session)):
 		return True
 	return False
 
 # UPGRADE #
-def verificaLogin(email, senha):
-	#{'message': 'Invalid credentials'}
-	loginData = {"email":email, "password":senha}
-	response = requests.post('http://127.0.0.1:8080/api/login', json=loginData)
-	jason = response.json()
-	print(jason)
+def verificaLogin(email, password):
+	#formato json para falha {'message': 'Invalid credentials'}
+	#montando requisição json
+	loginData 	= {"email":email, "password":password}
+	# pprint(loginData)
+	# print()
+	response 	= requests.post('http://127.0.0.1:8080/api/login', json=loginData)
+	jason 		= response.json()
+	# pprint(jason)
+	# print()
+	#Validação json
 	if('message' in jason.keys()):
 		return False
-	return True
-
+	else:
+		#criando sessão para mante login
+		session['email'] 	= email
+		session['password'] = password
+		return True
 
 ########################################################
 
 def iniciar():
 	app.url_map.strict_slashes = False
-	criar.tabela()
 	app.run(debug=True, host='127.0.0.1', port = 8000)
 
 if __name__ == "__main__":

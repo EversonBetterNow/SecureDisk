@@ -4,16 +4,16 @@ from models import db
 class ProviderModel(db.Model):
     __tablename__ = 'provider'
 
-    id: int = db.Column(db.Integer, primary_key=True)
-    business_name: str = db.Column(db.String(30), nullable=False)
-    fantasy_name: str = db.Column(db.String(100), nullable=False)
-    cnpj: str = db.Column(db.String(14), nullable=False, unique=True)
-    tel: str = db.Column(db.String(10), nullable=False)
-    cel: str = db.Column(db.String(11), nullable=True)
-    email: str = db.Column(db.String(128), nullable=False, unique=True)
-    password: str = db.Column(db.String(256), nullable=True)
-    status: str = db.Column(db.String(100), nullable=False, default='ativo')
-    created_date = db.Column(db.Date)
+    id:             int = db.Column(db.Integer,     primary_key=True)
+    business_name:  str = db.Column(db.String(30),  nullable=False)
+    fantasy_name:   str = db.Column(db.String(100), nullable=False)
+    cnpj:           str = db.Column(db.String(14),  nullable=False, unique=True)
+    tel:            str = db.Column(db.String(10),  nullable=False)
+    cel:            str = db.Column(db.String(11),  nullable=True)
+    email:          str = db.Column(db.String(128), nullable=False, unique=True)
+    password:       str = db.Column(db.String(256), nullable=True)
+    status:         str = db.Column(db.String(100), nullable=False, default='ativo')
+    created_date        = db.Column(db.Date)
     
 
     @staticmethod

@@ -1,0 +1,98 @@
+<!--Layout bonito com defeito: https://bootsnipp.com/snippets/dldxB -->
+<!-- opc 1: https://bootsnipp.com/snippets/k7MqR -->
+<!-- opc 2: https://bootsnipp.com/snippets/VxmR -->
+<!-- layout trabsom: https://bootsnipp.com/snippets/1KA79 -->
+<!DOCTYPE HTML5>
+
+<html>
+	<head>
+		<title>TCC</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+	  		if ( window.history.replaceState )
+	        	window.history.replaceState( null, null, window.location.href );
+		</script>
+		<!-- bootstrap Inicio -->
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+		<!-- bootstrap FIM -->
+		<script>
+	  		if ( window.history.replaceState ) 
+	        	window.history.replaceState( null, null, window.location.href );
+    	</script>
+		<link rel="stylesheet" href="/static/css/login.css">
+		
+	</head>
+	<body>
+		<div class="wrapper fadeInDown">
+		  <div id="formContent">
+		    <!-- Tabs Titles -->
+
+		    <!-- Icon -->
+		    <div class="fadeIn first">
+		      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+		    </div>
+
+		    <!-- Login Form -->
+		    <form action="/logando" method="POST">
+		      <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
+		      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+		      <input type="submit" class="fadeIn fourth" value="Log In">
+		    </form>
+
+		    <!-- Remind Passowrd -->
+		    <div id="formFooter">
+		      <a class="underlineHover" href="#">Forgot Password?</a>
+		    </div>
+
+		  </div>
+		</div>    
+	</body>
+</html>
+
+<!--  <html>
+
+    <div id="formFooter">
+		    	<label class="error">{{msg}}</label>
+		      	<a class="underlineHover" href="#">Forgot Password?</a>    
+		    </div>
+
+
+
+	<head>
+		<title>Index</title>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="/static/css/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="/static/css/lib/reset.css">
+		
+		
+
+	</head>
+	
+	<body>
+		<div align="center" class= "container" id="form-login">
+			<form class="col" action="/logando" method="POST">
+				<label>Email</label>
+				<input type="email" name="mail" id="email">
+				<label>Senha</label>
+				<input type="password" name="password" id="senha">
+				<input type="Submit" name="entrar" class="button" value="Entrar" id="login">
+				
+			</form>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+		<script src="/static/js/bootstrap/bootstrap.min.js"></script>
+
+
+
+	</body>
+</html>
