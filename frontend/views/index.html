@@ -19,10 +19,12 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
 		<!-- bootstrap FIM -->
-		<script>
-	  		if ( window.history.replaceState ) 
-	        	window.history.replaceState( null, null, window.location.href );
-    	</script>
+    	<script>
+                // It will work
+                $('#carousel').carousel({
+                    interval: 5000
+                });
+        </script>
 		<link rel="stylesheet" href="/static/css/login.css">
 		
 	</head>
@@ -38,9 +40,10 @@
 
 		    <!-- Login Form -->
 		    <form action="/logando" method="POST">
-		      <input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
-		      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-		      <input type="submit" class="fadeIn fourth" value="Log In">
+		      	<input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
+		      	<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+		      	<input type="submit" class="fadeIn fourth" value="Log In">
+		    	<label class="error" color="red">{{msg}}</label>
 		    </form>
 
 		    <!-- Remind Passowrd -->
@@ -55,10 +58,7 @@
 
 <!--  <html>
 
-    <div id="formFooter">
-		    	<label class="error">{{msg}}</label>
-		      	<a class="underlineHover" href="#">Forgot Password?</a>    
-		    </div>
+    
 
 
 

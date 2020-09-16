@@ -1,4 +1,4 @@
-import chaos.control					as c
+import controller.control					as c
 import configApp					as a
 import os
 import requests
@@ -44,11 +44,11 @@ class servidor:
 			if(verificaLogin(form.get('mail'), form.get('password'))):
 				return redirect('/home')
 			else:
-				return render_template('index.html', msg='Erro: Email ou password inválida')
+				return render_template('index.html', msg='Erro: Email ou senha inválida')
 
 		elif (verificacaoDeSessao()):
-			if (consultaSegurado.seguradoExiste()):
-				return redirect('/home')
+			# if (consultaSegurado.seguradoExiste()):
+			return redirect('/home')
 			# if (consultaColaborador.colaboradorExiste()):
 			# 	return redirect('/caixa_de_entrada')
 		else:
