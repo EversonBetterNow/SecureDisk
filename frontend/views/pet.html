@@ -1,0 +1,87 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>TCC</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+		<div style="padding-left: 20; padding-top: 10; width: 50; height: 50;">
+			<a href="/home">
+			<img src="/static/images/icons/back.png" alt="Image" style="max-width:100%;" />
+			</a>
+		</div>
+
+				<div class="container">
+					<div class="row">
+				<div class="col-md-6">
+                    <div class="well-block">
+                        <div class="well-title">
+                            <h2>Agendamento</h2>
+                        </div>
+                        <form>
+                            <!-- Form start -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="name">Pet</label>
+                                        <select id="appointmentfor" name="appointmentfor" class="form-control">
+                                            <option value="Pet#1">O Pet a ser consultado</option>
+                                            <option value="Pet#2">Petizinho</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="email">Nº da Proposta</label>
+                                        <input id="email" name="email" type="text" placeholder="Nº da Proposta" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="date">Data</label>
+                                        <input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <!-- Select Basic -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="time">Hora</label>
+                                        <select id="time" name="time" class="form-control">
+                                            <option value="8:00 to 9:00">8:00 às 9:00</option>
+                                            <option value="9:00 to 10:00">9:00 às 10:00</option>
+                                            <option value="10:00 to 1:00">10:00 às 11:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Select Basic -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="appointmentfor">Tipo de serviço</label>
+                                        <select id="appointmentfor" name="appointmentfor" class="form-control">
+                                            <option value="Service#1">Check-up!</option>
+                                            <option value="Service#2">Retorno</option>
+                                            <option value="Service#3">Tratamento</option>
+                                            <option value="Service#4">Outros</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="singlebutton" name="singlebutton" class="btn btn-default">
+                                        Agendar!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>	</div>
+</div>
+</body>
+</html>

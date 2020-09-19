@@ -5,56 +5,69 @@
 <!DOCTYPE HTML5>
 
 <html>
-	<head>
-		<title>TCC</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-	  		if ( window.history.replaceState )
-	        	window.history.replaceState( null, null, window.location.href );
-		</script>
-		<!-- bootstrap Inicio -->
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
-		<!-- bootstrap FIM -->
-    	<script>
+<head>
+	<title>TCC</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+		if ( window.history.replaceState )
+			window.history.replaceState( null, null, window.location.href );
+	</script>
+	<!-- bootstrap Inicio -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+	<!-- bootstrap FIM -->
+	<script>
                 // It will work
                 $('#carousel').carousel({
-                    interval: 5000
+                	interval: 5000
                 });
-        </script>
-		<link rel="stylesheet" href="/static/css/login.css">
-		
-	</head>
-	<body>
-		<div class="wrapper fadeInDown">
-		  <div id="formContent">
-		    <!-- Tabs Titles -->
+            </script>
+            <link rel="stylesheet" href="/static/css/login.css">
 
-		    <!-- Icon -->
-		    <div class="fadeIn first">
-		      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-		    </div>
+        </head>
 
-		    <!-- Login Form -->
-		    <form action="/logando" method="POST">
-		      	<input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
-		      	<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-		      	<input type="submit" class="fadeIn fourth" value="Log In">
-		    	<label class="error" color="red">{{msg}}</label>
-		    </form>
 
-		    <!-- Remind Passowrd -->
-		    <div id="formFooter">
-		      <a class="underlineHover" href="#">Forgot Password?</a>
-		    </div>
+        <body>
+        	<div class="wrapper fadeInDown">
+        		<div id="formContent">
+        			<!-- Icon -->
+        			<div class="fadeIn first">
+        				<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Logo" />
+        			</div>
 
-		  </div>
-		</div>    
-	</body>
-</html>
+        			<!-- Login Form -->
+        			<form action="/logando" method="POST">
+        				<div class="container">
+        					<label class="radio-inline">
+        						Usuário
+        						<input type="radio" name="optradio" value="insured" style="margin: 1%;" checked/>
+        					</label>
+        					<label class="radio-inline">
+        						Colaborador
+        						<input type="radio" name="optradio" value="provider" style="margin: 1%;"/>
+        					</label>
+        				</div>
+        				<div class="container">
+        					<input type="text" id="login" class="fadeIn second" name="mail" placeholder="login">
+        					<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+        					<input type="submit" class="fadeIn fourth" value="Log In">
+        				</div>
+
+        				<label class="error" color="red">{{msg}}</label>
+        			</form>
+
+        			<!-- Remind Passowrd -->
+        			<div id="formFooter">
+        				<a class="underlineHover" href="#">Forgot Password?</a>
+        			</div>
+
+        		</div>
+        	</div>    
+        </body>
+        </html>
 
 <!--  <html>
 
