@@ -1,4 +1,3 @@
-import configApp					as a
 import os
 import requests
 from pprint import pprint as pprint
@@ -16,10 +15,8 @@ from flask 	import url_for
 #securedisk@2020
 #
 pesquisa_cordenadas_gps = 'http://api.positionstack.com/v1/reverse?access_key=dc2e79642768afb966b7e46b48ec1b0b&query='
-app 			= a.createApp()
+app = Flask(__name__, template_folder='views/', static_folder="views/static/")
 app.secret_key 	= os.urandom(16)
-
-
 class servidor:
 	@app.route("/testar_layout", methods=['GET'])
 	def testar_layout():
@@ -169,7 +166,7 @@ def verificaLogin(email, password, typee):
 	#formato json para falha {'message': 'Invalid credentials'}
 	#montando requisição json
 	loginData 	= {"email":email, "password":password}
-	response 	= requests.post('http://127.0.0.1:8080/api/login', json=loginData)
+	response 	= requests.post('http://127.0.0.2:8080/api/login', json=loginData)
 	jason 		= response.json()
 	# print()
 	# pprint(jason)
@@ -187,13 +184,19 @@ def verificaLogin(email, password, typee):
 	return True
 
 ########################################################
-
-def iniciar():
-	app.url_map.strict_slashes = False
-	app.run(debug=True, host='127.0.0.1', port = 8000)
+config={
+		'DEBUG':'True',
+		'CACHE_TYPE': 'simple',
+		'CACHE_REDIS_HOST': '127.0.0.1',
+		'CACHE_REDIS_PORT': '8000',
+		'CACHE_REDIS_URL': 'simple://127.0.0.1:8000'
+	}
 
 if __name__ == "__main__":
-	iniciar()
+	print('Initilizing application')
+	app.config.from_mapping(config)
+	app.config.from_object(config)
+	app.run(debug=True, host='127.0.0.1', port = 8000)
 
 # Exemplo de retorno (apagarás em breve)
 #{

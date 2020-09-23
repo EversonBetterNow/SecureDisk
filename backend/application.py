@@ -36,8 +36,16 @@ def startup():
     print("Initializing migration DB")
     Schema.migration()
 
-
+config={
+		'DEBUG':'True',
+		'CACHE_TYPE': 'simple',
+		'CACHE_REDIS_HOST': '127.0.0.2',
+		'CACHE_REDIS_PORT': '8080',
+		'CACHE_REDIS_URL': 'simple://127.0.0.2:8080'
+	}
 # Run application
 if __name__ == '__main__':
     print('Initilizing application')
-    application.run(debug=False, host='127.0.0.1', port = 8080)
+    app.config.from_mapping(config)
+	app.config.from_object(config)
+    application.run(debug=True, host='127.0.0.2', port = 8080)
