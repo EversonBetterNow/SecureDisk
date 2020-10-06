@@ -10,9 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/SecureDisk"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Notices"></activity>
+        <activity android:name=".NoticesActivity"></activity>
+        <activity android:name=".Notices" />
         <activity android:name=".EmergencyActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
