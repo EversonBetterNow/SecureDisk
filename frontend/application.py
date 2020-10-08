@@ -1,7 +1,10 @@
 import os
 import requests
+import codecs
+import itens.builder as builder_itens
 from pprint import pprint as pprint
 from flask 	import render_template
+from flask 	import render_template_string
 from flask 	import session
 from flask 	import redirect
 from flask 	import request
@@ -18,9 +21,17 @@ pesquisa_cordenadas_gps = 'http://api.positionstack.com/v1/reverse?access_key=dc
 app = Flask(__name__, template_folder='views/', static_folder="views/static/")
 app.secret_key 	= os.urandom(16)
 class servidor:
+
 	@app.route("/testar_layout", methods=['GET'])
 	def testar_layout():
-		return render_template('caixa_de_entrada.html')
+		item = builder_itens.build()
+		pets = item.listPet()
+		f = codecs.open("caixa_de_entrada.html", 'r')
+		f = f.read()
+		f = f.replace(r'{itens}', pets[0])
+		f = f.replace(r'{itens_totais}', pets[1])
+		return render_template_string('caixa_de_entrada.html')
+
 
 	#Login
 	@app.route("/", methods=['GET'])
@@ -35,9 +46,6 @@ class servidor:
 	def logando():
 		if(request.method == 'POST'):
 			form = request.form
-			# print()
-			# print()
-			# print()
 			if(verificaLogin(form.get('mail'), form.get('password'), form.get('optradio'))):
 				if(form.get('optradio') == 'insured'):
 					return redirect('/home')
