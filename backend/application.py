@@ -46,6 +46,6 @@ config={
 # Run application
 if __name__ == '__main__':
     print('Initilizing application')
-    app.config.from_mapping(config)
-	app.config.from_object(config)
+    application.config.from_mapping(config)
+    application.config.from_object(config)
     application.run(debug=True, host='127.0.0.2', port = 8080)

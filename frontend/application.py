@@ -22,15 +22,19 @@ app = Flask(__name__, template_folder='views/', static_folder="views/static/")
 app.secret_key 	= os.urandom(16)
 class servidor:
 
+	@app.route("/testar_calendar", methods=['GET'])
+	def testar_calendar():
+		return render_template('calendar.html')
+
 	@app.route("/testar_layout", methods=['GET'])
 	def testar_layout():
 		item = builder_itens.build()
 		pets = item.listPet()
-		f = codecs.open("caixa_de_entrada.html", 'r')
+		f = codecs.open("views/caixa_de_entrada.html", 'r')
 		f = f.read()
 		f = f.replace(r'{itens}', pets[0])
-		f = f.replace(r'{itens_totais}', pets[1])
-		return render_template_string('caixa_de_entrada.html')
+		f = f.replace(r'{itens_totais}', str(pets[1]))
+		return render_template_string(f)
 
 
 	#Login
@@ -192,18 +196,18 @@ def verificaLogin(email, password, typee):
 	return True
 
 ########################################################
-config={
-		'DEBUG':'True',
-		'CACHE_TYPE': 'simple',
-		'CACHE_REDIS_HOST': '127.0.0.1',
-		'CACHE_REDIS_PORT': '8000',
-		'CACHE_REDIS_URL': 'simple://127.0.0.1:8000'
-	}
+# config={
+# 		'DEBUG':'True',
+# 		'CACHE_TYPE': 'simple',
+# 		'CACHE_REDIS_HOST': '127.0.0.1',
+# 		'CACHE_REDIS_PORT': '8000',
+# 		'CACHE_REDIS_URL': 'simple://127.0.0.1:8000'
+# 	}
 
 if __name__ == "__main__":
 	print('Initilizing application')
-	app.config.from_mapping(config)
-	app.config.from_object(config)
+	# app.config.from_mapping(config)
+	# app.config.from_object(config)
 	app.run(debug=True, host='127.0.0.1', port = 8000)
 
 # Exemplo de retorno (apagarás em breve)
